@@ -1,4 +1,5 @@
 import React from 'react';
+import BowlingGame from "./components/BowlingGame/BowlingGame";
 import './App.css';
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
       <header className="App-header">
           Bowling Score
       </header>
+        <BowlingGame/>
     </div>
   );
 }

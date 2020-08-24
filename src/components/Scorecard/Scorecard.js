@@ -8,9 +8,12 @@ class Scorecard {
 
     addFrame(frame) {
         this.frames.push(frame);
+        this.calculateScore();
     }
 
     calculateScore() {
         console.log('score');
     }
 }
+
+export default Scorecard;

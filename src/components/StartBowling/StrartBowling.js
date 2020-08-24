@@ -8,19 +8,17 @@ function StartBowling(props) {
     const [name, setName] = useState('');
 
     function handleNameSubmit(e) {
-        props.addPlayer(name);
-        console.log(`Name ${name}`);
         e.preventDefault();
+        props.addPlayer(name);
     }
 
     function handleStartGame(e) {
-        props.startGame();
         e.preventDefault();
+        props.startGame();
     }
 
     return (
         <Row justifyContent="between">
-
             <Button title="Click to Start game"
                  onClick={handleStartGame}
                  value="start">Start Game »
@@ -41,7 +39,6 @@ function StartBowling(props) {
                     </Field>
                 </Col>
             </Row>
-
         </Row>
     );
 }

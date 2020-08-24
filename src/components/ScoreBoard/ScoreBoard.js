@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Row, Col } from '@zendeskgarden/react-grid';
 import { Button } from '@zendeskgarden/react-buttons';
 
-function PinDeck(props) {
+function ScoreBoard(props) {
 
     const [pinsStanding, setPinsStanding] = useState(10);
 
@@ -12,14 +12,8 @@ function PinDeck(props) {
     }
 
     return (
-        [...Array(pinsStanding)].map((x, i) =>
-            <Button title="Throw Ball"
-                 onClick={handleBallthrow}
-                 value={i + 1}>
-                {i + 1}
-            </Button>
-        )
+        <div>Scoreboard</div>
     );
 }
 
-export default PinDeck;
+export default ScoreBoard;

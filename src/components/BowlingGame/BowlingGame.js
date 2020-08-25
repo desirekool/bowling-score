@@ -9,15 +9,15 @@ function BowlingGame() {
     const [gameInProgress, setGameInProgress] = useState(false);
     const [player, setPlayer] = useState('');
     const [pinsOnTheDeck, setPinsOnTheDeck] = useState(10);
-    // const [frameState, setFrameState] = useState(0);
-    // const [frameStart, setFrameStart] = useState(true);
-    let scorecard = null;
+    const [scorecard, setScorecard] = useState(null);
     function handleStartGame() {
         setGameInProgress(player.length ? true:false);
     }
 
     function handleAddPlayer(newPlayer) {
-        scorecard = new Scorecard(newPlayer);
+        const sc = new Scorecard();
+        sc.setPlayer(newPlayer);
+        setScorecard(sc);
         setPlayer(newPlayer);
     }
 
@@ -34,7 +34,7 @@ function BowlingGame() {
                 /> : null
             )}
 
-            {(player.length ?
+            {(scorecard ?
                     <ScoreBoard
                         score={scorecard}
                     /> : null

@@ -1881,6 +1881,15 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
+"@zendeskgarden/container-accordion@^1.0.0":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/container-accordion/-/container-accordion-1.0.1.tgz#bb81cc3326812987ca8122e2c86ccfb7fb855f45"
+  integrity sha512-3YJdEhiY8zxzTR9Y16YUZYOB5kH/4epgLf+PQ95AZutaVTT4rLBw42N0WHHksDjCXppk7pCqivQEw3YbGc0iZQ==
+  dependencies:
+    "@babel/runtime" "^7.8.4"
+    "@zendeskgarden/container-utilities" "^0.5.4"
+    react-uid "^2.2.0"
+
 "@zendeskgarden/container-buttongroup@^0.3.1":
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/@zendeskgarden/container-buttongroup/-/container-buttongroup-0.3.6.tgz#12c16414a744758d7848380c3cb6306865fd570f"
@@ -1934,6 +1943,16 @@
   dependencies:
     "@zendeskgarden/container-buttongroup" "^0.3.1"
     "@zendeskgarden/container-keyboardfocus" "^0.4.1"
+    polished "^3.5.1"
+
+"@zendeskgarden/react-chrome@^8.20.0":
+  version "8.20.0"
+  resolved "https://registry.yarnpkg.com/@zendeskgarden/react-chrome/-/react-chrome-8.20.0.tgz#0baa0a2b1127f9a4db0a575fd61d06deb54b88fe"
+  integrity sha512-nSj/okbCa+pBVbQH3/NVcpQQSHKvV+OCQv/S47/r3/epZqnJ6GUB9e2Ry3IFsU711lCIIwLaQxa4ak7a+E9cug==
+  dependencies:
+    "@zendeskgarden/container-accordion" "^1.0.0"
+    "@zendeskgarden/container-keyboardfocus" "^0.4.1"
+    "@zendeskgarden/container-utilities" "^0.5.1"
     polished "^3.5.1"
 
 "@zendeskgarden/react-forms@^8.20.0":

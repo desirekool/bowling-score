@@ -7,6 +7,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.1.2",
     "@zendeskgarden/react-buttons": "^8.20.0",
+    "@zendeskgarden/react-chrome": "^8.20.0",
     "@zendeskgarden/react-forms": "^8.20.0",
     "@zendeskgarden/react-grid": "^8.20.0",
     "@zendeskgarden/react-theming": "^8.20.0",

@@ -3,6 +3,8 @@ import { Field, Input} from '@zendeskgarden/react-forms';
 import { Row, Col } from '@zendeskgarden/react-grid';
 import { Button } from '@zendeskgarden/react-buttons';
 
+//TODO: Add Reset Button for Game in Progress
+
 function StartBowling(props) {
 
     const [name, setName] = useState('');

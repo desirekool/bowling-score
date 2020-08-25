@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import StartBowling from "../../components/Utils/FrontOffice/StrartBowling";
+import { Row, Col } from '@zendeskgarden/react-grid';
+import StartBowling from "../FrontOffice/StrartBowling";
 import PinDeck from "../PinDeck/PinDeck";
 import Scorecard from "../../components/business/Scorecard/Scorecard";
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
@@ -10,8 +11,15 @@ function BowlingGame() {
     const [player, setPlayer] = useState('');
     const [pinsOnTheDeck, setPinsOnTheDeck] = useState(10);
     const [scorecard, setScorecard] = useState(null);
-    function handleStartGame() {
+    function startGame() {
         setGameInProgress(player.length ? true:false);
+    }
+
+    function stopGame() {
+        setGameInProgress(false);
+        setPinsOnTheDeck(10);
+        setPlayer('');
+        setScorecard(null);
     }
 
     function handleAddPlayer(newPlayer) {
@@ -26,18 +34,17 @@ function BowlingGame() {
     }
 
     return (
-        <div>
-            {(!gameInProgress ?
-                <StartBowling
-                    startGame = {handleStartGame}
-                    addPlayer = {handleAddPlayer}
-                /> : null
-            )}
-
+        <div className={'game-wrapper'}>
+            <StartBowling
+                startGame = {startGame}
+                stopGame = {stopGame}
+                addPlayer = {handleAddPlayer}
+                gameStatus = {gameInProgress}
+            />
             {(scorecard ?
-                    <ScoreBoard
-                        score={scorecard}
-                    /> : null
+                <ScoreBoard
+                    score={scorecard}
+                /> : null
             )}
 
             {(gameInProgress ?

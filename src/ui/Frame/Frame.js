@@ -1,13 +1,28 @@
 import React from 'react';
-import { Row, Col } from '@zendeskgarden/react-grid';
-import { Header, HeaderItem, HeaderItemWrapper } from '@zendeskgarden/react-chrome'
-
+import {FrameWrapper, FramePinsWrapper, FrameNumber, StrikeThrow, SpareThrow, BonusThrow, FrameCurrentScore} from "./styles";
 
 function Frame(props) {
     return (
-        <span >
 
-        </span>
+        <FrameWrapper FirstFrame={props.index === 1}>
+            <FrameNumber>{props.index}</FrameNumber>
+            <FramePinsWrapper>
+                <StrikeThrow LastFrame={props.index===10}>
+                    10
+                </StrikeThrow>
+                <SpareThrow>
+                    10
+                </SpareThrow>
+                {props.index===10 ?
+                    <BonusThrow>
+                        10
+                    </BonusThrow> : null
+                }
+            </FramePinsWrapper>
+            <FrameCurrentScore>
+                299
+            </FrameCurrentScore>
+        </FrameWrapper>
     );
 }
 

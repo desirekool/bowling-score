@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
 import { Row, Col } from '@zendeskgarden/react-grid';
-import StartBowling from "../FrontOffice/StrartBowling";
+import FrontOffice from "../FrontOffice/FrontOffice";
 import PinDeck from "../PinDeck/PinDeck";
 import Scorecard from "../../components/business/Scorecard/Scorecard";
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
 
 function BowlingGame() {
-
     const [gameInProgress, setGameInProgress] = useState(false);
     const [player, setPlayer] = useState('');
     const [pinsOnTheDeck, setPinsOnTheDeck] = useState(10);
@@ -35,7 +34,7 @@ function BowlingGame() {
 
     return (
         <div className={'game-wrapper'}>
-            <StartBowling
+            <FrontOffice
                 startGame = {startGame}
                 stopGame = {stopGame}
                 addPlayer = {handleAddPlayer}

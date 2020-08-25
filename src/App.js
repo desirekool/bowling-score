@@ -1,5 +1,5 @@
 import React from 'react';
-import BowlingGame from "./components/BowlingGame/BowlingGame";
+import BowlingGame from "./ui/BowlingGame/BowlingGame";
 import './App.css';
 
 function App() {

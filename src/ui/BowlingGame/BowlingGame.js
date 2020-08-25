@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import StartBowling from "../StartBowling/StrartBowling";
+import StartBowling from "../../components/Utils/FrontOffice/StrartBowling";
 import PinDeck from "../PinDeck/PinDeck";
-import Scorecard from "../Scorecard/Scorecard";
+import Scorecard from "../../components/business/Scorecard/Scorecard";
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
 
 function BowlingGame() {

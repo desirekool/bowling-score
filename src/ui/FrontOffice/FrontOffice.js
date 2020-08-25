@@ -4,7 +4,7 @@ import { Row, Col } from '@zendeskgarden/react-grid';
 import { Button } from '@zendeskgarden/react-buttons';
 import {FrontOfficeWrapper} from "./styles";
 
-//TODO: Add Reset Button for Game in Progress
+//TODO : Further Improve the position and Styling of elements and controls display logic
 
 function FrontOffice(props) {
 
@@ -27,29 +27,19 @@ function FrontOffice(props) {
 
     return (
         <Row justifyContent="between">
-            <Col>
-                {(!props.gameStatus ?
-                <Button title="Click to Start game"
-                     onClick={handleStartGame}
-                     value="start">Start Game »
-                </Button> : null
-                )}
-            </Col>
-            {(props.gameStatus ?
-                <Col>
-                    <Button title="stop game"
-                            onClick={handleResetGame()}
-                            value="start">Stop Game »
-                    </Button>
-                </Col> : null
+            {(!props.gameStatus ?
+            <Col><Button onClick={handleStartGame} value="start">Start Game »</Button></Col> : null
             )}
-            <Col>
-                {(!props.gameStatus ?
+            {(props.gameStatus ?
+                <Col><Button onClick={handleResetGame} value="stop">Stop Game »</Button></Col> : null
+            )}
+            {(!props.gameStatus ?
+                <Col>
                     <Row justifyContent="between">
                         <Col>
                             <Button title="Click to create another game"
                                  onClick={handleNameSubmit}
-                                 value="start">Add Player »
+                                 value="addPlayer">Add Player »
                             </Button>
                         </Col>
                         <Col>
@@ -60,9 +50,10 @@ function FrontOffice(props) {
                                 />
                             </Field>
                         </Col>
-                    </Row> : null
-                )}
-            </Col>
+                    </Row>
+                </Col>: null
+            )}
+
         </Row>
     );
 }

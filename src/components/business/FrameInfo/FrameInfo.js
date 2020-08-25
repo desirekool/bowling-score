@@ -3,6 +3,7 @@ export const STRIKE = 'strike';
 export const SPARE = 'spare';
 export const FOUL = 'foul';
 export const SPLIT = 'split';
+export const MISS = 'miss';
 
 class FrameInfo {
 

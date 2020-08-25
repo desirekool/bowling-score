@@ -5,12 +5,17 @@ import PinDeck from "../PinDeck/PinDeck";
 import Scorecard from "../../components/business/Scorecard/Scorecard";
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
 
+//TODO: Use useEffect Hook to simplify the code??
+
 function BowlingGame() {
     const [gameInProgress, setGameInProgress] = useState(false);
     const [player, setPlayer] = useState('');
     const [pinsOnTheDeck, setPinsOnTheDeck] = useState(10);
     const [scorecard, setScorecard] = useState(null);
+    const [currentFrameNumber, setCurrentFrameNumber] = useState(0);
+
     function startGame() {
+        setCurrentFrameNumber(0);
         setGameInProgress(player.length ? true:false);
     }
 
@@ -19,6 +24,7 @@ function BowlingGame() {
         setPinsOnTheDeck(10);
         setPlayer('');
         setScorecard(null);
+        setCurrentFrameNumber(0);
     }
 
     function handleAddPlayer(newPlayer) {
@@ -30,6 +36,10 @@ function BowlingGame() {
 
     function handleBallThrow(ballThrow) {
         setPinsOnTheDeck(ballThrow);
+    }
+
+    function getCurrentFrameInfo() {
+        return currentFrameNumber > 0 ? scorecard.frames[currentFrameNumber - 1]: null;
     }
 
     return (
@@ -50,6 +60,8 @@ function BowlingGame() {
                 <PinDeck
                     pinsOntheDeck={pinsOnTheDeck}
                     throwBall={handleBallThrow}
+                    frame={getCurrentFrameInfo}
+                    frameNumber={currentFrameNumber}
                 /> : null
             )}
         </div>

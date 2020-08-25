@@ -25,13 +25,13 @@ class Scorecard {
         this.calculateScore();
     }
 
-    updateCurentFrame(frame) {
-        this.frames[this.currentFrame] = frame;
-        this.calculateScore();
+    getCurrentFrame() {
+        return this.frames[this.currentFrame];
     }
 
-    setCurrentFrame(currentFrame) {
-        this.currentFrame = currentFrame;
+    setCurrentFrame(frame) {
+        this.frames[this.currentFrame] = frame;
+        this.calculateScore();
     }
 
     calculateScore() {

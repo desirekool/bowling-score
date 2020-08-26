@@ -4,42 +4,49 @@ import FrontOffice from "../FrontOffice/FrontOffice";
 import PinDeck from "../PinDeck/PinDeck";
 import Scorecard from "../../components/business/Scorecard/Scorecard";
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
+import {ALL_PINS_STANDING} from "../../components/business/FrameInfo/FrameInfo";
+import {isNil} from "lodash";
 
 //TODO: Use useEffect Hook to simplify the code??
 
 function BowlingGame() {
     const [gameInProgress, setGameInProgress] = useState(false);
-    const [player, setPlayer] = useState('');
     const [pinsOnTheDeck, setPinsOnTheDeck] = useState(10);
     const [scorecard, setScorecard] = useState(null);
-    const [currentFrameNumber, setCurrentFrameNumber] = useState(0);
+    const [counter, setCounter] = useState(null);
 
     function startGame() {
-        setCurrentFrameNumber(0);
-        setGameInProgress(player.length ? true:false);
+        setGameInProgress(!isNil(scorecard.player) && scorecard.player.length ? true : false);
     }
 
     function stopGame() {
         setGameInProgress(false);
         setPinsOnTheDeck(10);
-        setPlayer('');
         setScorecard(null);
-        setCurrentFrameNumber(0);
+    }
+
+    function UpdateGameInLastFrame(message) {
+        if(message=== '') {
+            setGameInProgress(false);
+        } else {
+            setPinsOnTheDeck(10);
+        }
     }
 
     function handleAddPlayer(newPlayer) {
         const sc = new Scorecard();
         sc.setPlayer(newPlayer);
         setScorecard(sc);
-        setPlayer(newPlayer);
     }
 
-    function handleBallThrow(ballThrow) {
-        setPinsOnTheDeck(ballThrow);
-    }
-
-    function getCurrentFrameInfo() {
-        return currentFrameNumber > 0 ? scorecard.frames[currentFrameNumber - 1]: null;
+    function handleBallThrow(pinsKnockedDown) {
+        setScorecard(scorecard.throwBall(pinsKnockedDown, UpdateGameInLastFrame));
+        setCounter(counter + 1)
+        if (scorecard.getCurrentFrame().isNewFrame()) {
+            setPinsOnTheDeck(10);
+        } else {
+            setPinsOnTheDeck(pinsOnTheDeck - pinsKnockedDown);
+        }
     }
 
     return (
@@ -53,6 +60,7 @@ function BowlingGame() {
             {(scorecard ?
                 <ScoreBoard
                     score={scorecard}
+                    counter={counter}
                 /> : null
             )}
 
@@ -60,8 +68,6 @@ function BowlingGame() {
                 <PinDeck
                     pinsOntheDeck={pinsOnTheDeck}
                     throwBall={handleBallThrow}
-                    frame={getCurrentFrameInfo}
-                    frameNumber={currentFrameNumber}
                 /> : null
             )}
         </div>

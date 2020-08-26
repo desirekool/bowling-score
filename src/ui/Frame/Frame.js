@@ -1,21 +1,23 @@
 import React from 'react';
 import {FrameWrapper, FramePinsWrapper, FrameNumber, StrikeThrow, SpareThrow, BonusThrow, FrameCurrentScore} from "./styles";
+import {LAST_FRAME_STRIKE_AND_SPARE, MISS, SPARE, STRIKE} from "../../components/business/FrameInfo/FrameInfo";
+import {isNil} from "lodash";
 
 function Frame(props) {
-    return (
 
-        <FrameWrapper FirstFrame={props.index === 1}>
+    return (
+        <FrameWrapper FirstFrame={props.index === 0}>
             <FrameNumber>{props.index}</FrameNumber>
             <FramePinsWrapper>
-                <StrikeThrow LastFrame={props.index===10}>
-                    10
+                <StrikeThrow LastFrame={props.index === 10}>
+                    {props.frame.getFirstThrowScore()}
                 </StrikeThrow>
                 <SpareThrow>
-                    10
+                    {props.frame.getSecondThrowScore()}
                 </SpareThrow>
                 {props.index===10 ?
                     <BonusThrow>
-                        10
+                        {props.frame.getThirdThrowScore()}
                     </BonusThrow> : null
                 }
             </FramePinsWrapper>

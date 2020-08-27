@@ -27,7 +27,7 @@ Your app is ready to be deployed!
 *See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.*
 You need [node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) and npm installed  
 instal yarn with
-npm install -g yarn
+npm install yarn -g
 
 ### `yarn eject`
 

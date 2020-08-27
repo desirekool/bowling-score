@@ -25,7 +25,7 @@ function FrontOffice(props) {
     }
 
     return (
-        <Row justifyContent="between">
+        <Row justifyContent="between" className={'button-bar'}>
             {(!props.gameStatus ?
             <Col><Button onClick={handleStartGame} value="start">Start Game »</Button></Col> : null
             )}

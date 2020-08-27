@@ -5,7 +5,7 @@ export const FrameWrapper = styled.div`
   flex-direction: column;
   border: 1px solid grey;  
   margin: 20px 0;
-  ${props => !props.FirstFrame ? 'border-left: 0;': null}
+  ${props => !props.LastFrame ? 'border-right: 0;': null}
 `;
 
 export const FrameNumber = styled.div`

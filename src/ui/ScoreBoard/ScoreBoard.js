@@ -1,12 +1,12 @@
 import React from 'react';
 import { Header, HeaderItemWrapper } from '@zendeskgarden/react-chrome'
 import Frame from "../Frame/Frame";
-import {ScoreWrapper, FinalScore} from "./styles";
+import {ScoreWrapper, FinalScore, ScoreboardWrapper} from "./styles";
 import {uniqueId} from "lodash";
 
 function ScoreBoard(props) {
     return (
-        <>
+        <ScoreboardWrapper>
             <Header isStandalone={true}>
                 <HeaderItemWrapper maxX>
                     <span>{props.score.player}</span>
@@ -23,7 +23,7 @@ function ScoreBoard(props) {
                     {!isNaN(props.score.runningScore) ? props.score.runningScore : ''}
                 </FinalScore>
             </ScoreWrapper>
-        </>
+        </ScoreboardWrapper>
     );
 }
 

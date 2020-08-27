@@ -10,7 +10,7 @@ class Scorecard {
             this.frames.push(new FrameInfo())
         );
         this.currentFrame = 1;
-        this.finalScore = 0;
+        this.runningScore = 0;
     }
 
     throwBall(pinsKnockedDown, UpdateGameStatus) {
@@ -46,7 +46,7 @@ class Scorecard {
     }
 
     getNext2Rolls(frameIndex) {
-        let frameThrowList = this.frames[frameIndex + 1].pinsKnockedOnThrow.concat(!isNil(this.frames[frameIndex  + 2].pinsKnockedOnThrow) ? this.frames[frameIndex  + 2].pinsKnockedOnThrow : []);
+        let frameThrowList = this.frames[frameIndex + 1].pinsKnockedOnThrow.concat( (frameIndex !== 8 && !isNil(this.frames[frameIndex  + 2].pinsKnockedOnThrow)) ? this.frames[frameIndex  + 2].pinsKnockedOnThrow : []);
         let rolls = [];
         if (frameThrowList.length < 2) {
             rolls = null;
@@ -70,46 +70,36 @@ class Scorecard {
             if (frame.isScorePending) {
                 let lastFrameScore = null;
                 if (index === 9) {
-                    if (lastFrameScore) {
-                        if(this.currentFrame === 10) {
-                            lastFrameScore = (frame.pinsKnockedOnThrow.length > 2 || (frame.pinsKnockedOnThrow.length === 2 && frame.frameState === LAST_FRAME_MISS))
-                                ? frame.pinsKnockedOnThrow.reduce((total, num) => parseInt(total) + parseInt(num)) : null;
-                        }
-                        runningScore = runningScore + parseInt(lastFrameScore);
-                        frame.currentScore = runningScore;
+                    lastFrameScore = (frame.pinsKnockedOnThrow.length > 2 || (frame.pinsKnockedOnThrow.length === 2 && frame.frameState === LAST_FRAME_MISS))
+                        ? frame.pinsKnockedOnThrow.reduce((total, num) => parseInt(total) + parseInt(num)) : null;
+                    if (!isNaN(lastFrameScore)) {
+                        runningScore =  runningScore + parseInt(lastFrameScore);
+                        frame.currentScore = isNaN(runningScore) ? '' : runningScore;
                     }
+
                 } else {
                     if(frame.hasStrike()) {
                         let nextRolls = this.getNext2Rolls(index);
                         if(!isNil(nextRolls)) {
                             runningScore = runningScore + 10 + parseInt(nextRolls.reduce((total, num) => parseInt(total) + parseInt(num)), 0);
-                            console.log('stike');
-                            console.log(runningScore);
-                            console.log(nextRolls);
-                            console.log(parseInt(nextRolls.reduce((total, num) => parseInt(total) + parseInt(num)), 0));
                             frame.currentScore = runningScore;
                         }
                     } else if(frame.hasSpare()) {
                         let nextRoll = this.getNextRoll(index);
                         if(nextRoll) {
                             runningScore = runningScore + 10 + parseInt(this.getNextRoll(index));
-                            console.log('Spre');
-                            console.log(runningScore);
                             frame.currentScore = runningScore;
                         }
 
                     } else if(frame.hasMiss()) {
                         runningScore = runningScore + frame.pinsKnockedOnThrow.reduce((total, num) => parseInt(total) + parseInt(num), 0);
-                        console.log('miss');
-                        console.log(runningScore);
-                        console.log(parseInt(frame.pinsKnockedOnThrow.reduce((total, num) => parseInt(total) + parseInt(num)), 0));
                         frame.currentScore = runningScore;
                     }
                 }
 
             }
         });
-        console.log('score');
+        this.runningScore = runningScore;
     }
 }
 

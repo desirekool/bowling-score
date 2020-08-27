@@ -19,7 +19,7 @@ function ScoreBoard(props) {
                     />
                 ))}
                 <FinalScore>
-                    299
+                    {!isNaN(props.score.runningScore) ? props.score.runningScore : ''}
                 </FinalScore>
             </ScoreWrapper>
         </>

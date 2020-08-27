@@ -50,7 +50,7 @@ class FrameInfo {
 
     updateLastFrameThrows(pinsKnockedDown, UpdateGameStatus) {
         let updateMessage = null;
-        if(pinsKnockedDown == 10) {
+        if(parseInt(pinsKnockedDown) === 10) {
             if(this.frameState === STRIKE) {
                 this.frameState =  LAST_FRAME_STRIKE_AND_SPARE;
             } else if (this.frameState === SPARE) {

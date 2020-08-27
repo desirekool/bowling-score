@@ -2,6 +2,7 @@ import React from 'react';
 import { Header, HeaderItemWrapper } from '@zendeskgarden/react-chrome'
 import Frame from "../Frame/Frame";
 import {ScoreWrapper, FinalScore} from "./styles";
+import {uniqueId} from "lodash";
 
 function ScoreBoard(props) {
     return (
@@ -13,7 +14,7 @@ function ScoreBoard(props) {
             </Header>
             <ScoreWrapper>
                 {(props.score.frames.map((frame, index) =>
-                    <Frame
+                    <Frame key={uniqueId('frame_')}
                         index={index + 1}
                         frame = {frame}
                     />

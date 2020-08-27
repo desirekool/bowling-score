@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from '@zendeskgarden/react-buttons';
 import {PinDeckWrapper} from "./styles";
+import {uniqueId} from "lodash";
 
 function PinDeck(props) {
 
@@ -11,7 +12,7 @@ function PinDeck(props) {
 
     return (
         <PinDeckWrapper>
-            <Button
+            <Button key={uniqueId('frame_')}
                 size={"small"}
                 title={"0"}
                 onClick={handleBallThrow}
@@ -20,7 +21,7 @@ function PinDeck(props) {
                 0
             </Button>
             {[...Array(props.pinsOntheDeck)].map((pin, index) =>
-                <Button
+                <Button key={uniqueId('pin_')}
                     size={"small"}
                     title={index + 1}
                     onClick={handleBallThrow}

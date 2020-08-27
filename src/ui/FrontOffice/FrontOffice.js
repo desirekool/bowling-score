@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Field, Input} from '@zendeskgarden/react-forms';
 import { Row, Col } from '@zendeskgarden/react-grid';
 import { Button } from '@zendeskgarden/react-buttons';
-import {FrontOfficeWrapper} from "./styles";
 
 //TODO : Further Improve the position and Styling of elements and controls display logic
 
@@ -26,7 +25,7 @@ function FrontOffice(props) {
     }
 
     return (
-        <Row justifyContent="between">
+        <Row justifyContent="between" className={'button-bar'}>
             {(!props.gameStatus ?
             <Col><Button onClick={handleStartGame} value="start">Start Game »</Button></Col> : null
             )}

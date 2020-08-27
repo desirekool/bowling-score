@@ -51,11 +51,7 @@ class Scorecard {
         if (frameThrowList.length < 2) {
             rolls = null;
         } else {
-            frameThrowList.map((ballThrow, index) => {
-                if (rolls.length < 2) {
-                    rolls.push(ballThrow);
-                }
-            });
+            frameThrowList.map((ballThrow, index) => (rolls.length < 2 ? rolls.push(ballThrow) : null));
         }
         return !isNil(rolls) && rolls.length === 2  ? rolls : null;
     }
@@ -98,6 +94,7 @@ class Scorecard {
                 }
 
             }
+            return null;
         });
         this.runningScore = runningScore;
     }

@@ -4,7 +4,7 @@ import {FrameWrapper, FramePinsWrapper, FrameNumber, StrikeThrow, SpareThrow, Bo
 function Frame(props) {
 
     return (
-        <FrameWrapper FirstFrame={props.index === 0}>
+        <FrameWrapper LastFrame={props.index === 10}>
             <FrameNumber>{props.index}</FrameNumber>
             <FramePinsWrapper>
                 <StrikeThrow LastFrame={props.index === 10}>

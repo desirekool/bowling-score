@@ -19,3 +19,9 @@ export const FinalScore = styled.div`
     justify-content: center;
     padding-bottom: 17px;
 `;
+
+export const ScoreboardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;  
+`;

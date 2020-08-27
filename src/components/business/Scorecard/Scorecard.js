@@ -1,4 +1,5 @@
-import FrameInfo, {ALL_PINS_STANDING, FRAME_IN_PROGRESS} from "../FrameInfo/FrameInfo";
+import FrameInfo from "../FrameInfo/FrameInfo";
+import {isNil} from "lodash";
 
 class Scorecard {
 
@@ -9,19 +10,19 @@ class Scorecard {
             this.frames.push(new FrameInfo())
         );
         this.currentFrame = 1;
+        this.finalScore = 0;
     }
 
     throwBall(pinsKnockedDown, UpdateGameStatus) {
         let currentFrame = this.getCurrentFrame();
         if(this.isLastFrame()) {
             currentFrame.updateLastFrameThrows(pinsKnockedDown, UpdateGameStatus);
-        } else if (this.frameIsAStrike(currentFrame, pinsKnockedDown)) {
+        } else if (currentFrame.frameIsAStrike(pinsKnockedDown)) {
             currentFrame.setFrameAsStrike();
             this.currentFrame++;
-
-        } else if(this.frameIsInProgress(currentFrame, pinsKnockedDown)) {
+        } else if(currentFrame.frameIsInProgress(pinsKnockedDown)) {
             currentFrame.setFrameAsInProgress(pinsKnockedDown);
-        } else if(this.frameIsASpare(currentFrame, pinsKnockedDown)) {
+        } else if(currentFrame.frameIsASpare(pinsKnockedDown)) {
             currentFrame.setFrameAsSpare(pinsKnockedDown);
             this.currentFrame++;
         } else {
@@ -36,18 +37,6 @@ class Scorecard {
         return this.currentFrame === 10;
     }
 
-    frameIsAStrike(currentFrame, pinsKnockedDown) {
-        return pinsKnockedDown == 10 && currentFrame.frameState === ALL_PINS_STANDING && currentFrame.numberOfThrows == 0;
-    }
-
-    frameIsInProgress(currentFrame, pinsKnockedDown) {
-        return pinsKnockedDown != 10 && currentFrame.numberOfThrows == 0;
-    }
-
-    frameIsASpare(currentFrame, pinsKnockedDown) {
-        return ((parseInt(currentFrame.getPinsKnockedDown()) + parseInt(pinsKnockedDown)) == 10) && currentFrame.isInProgress();
-    }
-
     setPlayer(player) {
         this.player = player;
     }
@@ -56,13 +45,37 @@ class Scorecard {
         return this.frames[this.currentFrame -1];
     }
 
+    getNext2Rolls(frameIndex) {
+        let rolls = this.frames[frameIndex + 1].pinsKnockedOnThrow.concat(this.frames[frameIndex  + 2].pinsKnockedOnThrow).reduce((rollList, roll) => {
+
+            if(rollList.length < 2 && !isNil(roll)) {
+                rollList.push(roll);
+            }
+        }, []);
+        return !isNil(rolls) && rolls.length === 2  ? rolls : null;
+    }
+
+    getNextRoll(frameIndex) {
+        return this.frames[frameIndex + 1].pinsKnockedOnThrow.length ? this.frames[frameIndex + 1].pinsKnockedOnThrow : null;
+    }
+
     calculateScore() {
         let runningScore =0;
         this.frames.map((frame, index) => {
             if (frame.isScorePending) {
-
-                console.log(index);
-
+                if(frame.hasStrike()) {
+                    let nextRolls = this.getNext2Rolls(index);
+                    if(!isNil(nextRolls)) {
+                        runningScore = runningScore + 10 + nextRolls.reduce((total, num) => total + num);
+                        frame.currentScore(runningScore);
+                    }
+                } else if(frame.hasSPARE()) {
+                    let nextRoll = this.getNextRoll(index);
+                    if(nextRoll) {
+                        runningScore = runningScore + 10 + this.getNextRoll(index);
+                    }
+                    frame.currentScore(runningScore);
+                }
             }
         });
         console.log('score');

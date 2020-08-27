@@ -1,7 +1,5 @@
 import React from 'react';
 import {FrameWrapper, FramePinsWrapper, FrameNumber, StrikeThrow, SpareThrow, BonusThrow, FrameCurrentScore} from "./styles";
-import {LAST_FRAME_STRIKE_AND_SPARE, MISS, SPARE, STRIKE} from "../../components/business/FrameInfo/FrameInfo";
-import {isNil} from "lodash";
 
 function Frame(props) {
 

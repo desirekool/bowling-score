@@ -3,7 +3,6 @@ import {isNil} from "lodash";
 
 export const ALL_PINS_STANDING = 'pins';
 export const FRAME_IN_PROGRESS = 'inProgress';
-export const FRAME_COMPLETE = 'FrameComplete';
 export const STRIKE = 'strike';
 export const LAST_FRAME_STRIKE_AND_SPARE = 'xs';
 export const LAST_FRAME_STRIKE_AND_SPARE_AND_SPARE = 'xss';
@@ -15,8 +14,6 @@ export const LAST_FRAME_SPARE_AND_SPARE = '0ss';
 export const LAST_FRAME_SPARE_AND_MISS = '0s0';
 export const LAST_FRAME_MISS = '00';
 export const SPARE = 'spare';
-export const FOUL = 'foul';
-export const SPLIT = 'split';
 export const MISS = 'miss';
 export const SCORE_PENDING = 'pending'
 
@@ -47,18 +44,6 @@ class FrameInfo {
 
     setFrameAsMiss(pinsKnockedDown) {
         this.frameState = MISS;
-        this.pinsKnockedOnThrow.push(pinsKnockedDown);
-        this.numberOfThrows++;
-    }
-
-    updateLastFrameStrikeThrow() {
-        this.frameState = STRIKE;
-        this.pinsKnockedOnThrow.push(10);
-        this.numberOfThrows = 1;
-    }
-
-    updateLastFrameSpareThrow(pinsKnockedDown) {
-        this.frameState = this.frameState === STRIKE ? LAST_FRAME_STRIKE_AND_SPARE : SPARE ;
         this.pinsKnockedOnThrow.push(pinsKnockedDown);
         this.numberOfThrows++;
     }
@@ -109,19 +94,32 @@ class FrameInfo {
         ].includes(this.frameState) ? UpdateGameStatus('') : UpdateGameStatus(updateMessage);
     }
 
-    getPinsKnockedDown() {
-        return this.pinsKnockedOnThrow.reduce((totalPins, currentPins) => totalPins + currentPins);
+    frameIsAStrike(pinsKnockedDown) {
+        return parseInt(pinsKnockedDown) === 10 && this.frameState === ALL_PINS_STANDING && this.numberOfThrows === 0;
+    }
+
+    frameIsInProgress(pinsKnockedDown) {
+        return parseInt(pinsKnockedDown) !== 10 && this.numberOfThrows === 0;
+    }
+
+    frameIsASpare(pinsKnockedDown) {
+        return this.allPinsDown(pinsKnockedDown) && this.frameState === FRAME_IN_PROGRESS;
     }
 
     isNewFrame() {
         return this.frameState === ALL_PINS_STANDING;
     }
+
     isScorePending() {
         return this.currentScore === SCORE_PENDING;
     }
 
-    isInProgress() {
-        return this.frameState === FRAME_IN_PROGRESS;
+    hasStrike() {
+        return this.frameState === STRIKE;
+    }
+
+    hasSPARE() {
+        return this.frameState === SPARE;
     }
 
     allPinsDown(pinsKnockedDown) {
@@ -130,17 +128,17 @@ class FrameInfo {
 
     getFirstThrowScore() {
         let pinsKnocked = !isNil(this.pinsKnockedOnThrow[0]) ? this.pinsKnockedOnThrow[0] : '';
-        return pinsKnocked == 10 ? 'x' : pinsKnocked;
+        return parseInt(pinsKnocked) === 10 ? 'x' : pinsKnocked;
     }
 
     getSecondThrowScore() {
         let pinsKnocked = !isNil(this.pinsKnockedOnThrow[1]) ? this.pinsKnockedOnThrow[1] : '';
-        return [SPARE, LAST_FRAME_STRIKE_AND_SPARE].includes(this.frameState) || pinsKnocked == 10 ? '/' : pinsKnocked;
+        return [SPARE, LAST_FRAME_STRIKE_AND_SPARE].includes(this.frameState) || parseInt(pinsKnocked) === 10 ? '/' : pinsKnocked;
     }
 
     getThirdThrowScore() {
         let pinsKnocked = !isNil(this.pinsKnockedOnThrow[2]) ? this.pinsKnockedOnThrow[2] : '';
-        return pinsKnocked == 10 ? '/' : pinsKnocked;
+        return parseInt(pinsKnocked) === 10 ? '/' : pinsKnocked;
     }
 }
 

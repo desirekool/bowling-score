@@ -1,10 +1,8 @@
 import React, {useState} from 'react';
-import { Row, Col } from '@zendeskgarden/react-grid';
 import FrontOffice from "../FrontOffice/FrontOffice";
 import PinDeck from "../PinDeck/PinDeck";
 import Scorecard from "../../components/business/Scorecard/Scorecard";
 import ScoreBoard from "../ScoreBoard/ScoreBoard";
-import {ALL_PINS_STANDING} from "../../components/business/FrameInfo/FrameInfo";
 import {isNil} from "lodash";
 
 //TODO: Use useEffect Hook to simplify the code??

@@ -1,9 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Button } from '@zendeskgarden/react-buttons';
-import FrameInfo, {MISS, SPARE, STRIKE} from "../../components/business/FrameInfo/FrameInfo";
 import {PinDeckWrapper} from "./styles";
 
-//TODO: move logic to scorecard
 function PinDeck(props) {
 
     function handleBallThrow(e) {

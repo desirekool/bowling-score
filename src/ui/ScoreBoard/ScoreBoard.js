@@ -1,6 +1,5 @@
 import React from 'react';
-import { Row, Col } from '@zendeskgarden/react-grid';
-import { Header, HeaderItem, HeaderItemWrapper } from '@zendeskgarden/react-chrome'
+import { Header, HeaderItemWrapper } from '@zendeskgarden/react-chrome'
 import Frame from "../Frame/Frame";
 import {ScoreWrapper, FinalScore} from "./styles";
 
@@ -22,8 +21,6 @@ function ScoreBoard(props) {
                 <FinalScore>
                     299
                 </FinalScore>
-
-
             </ScoreWrapper>
         </>
     );

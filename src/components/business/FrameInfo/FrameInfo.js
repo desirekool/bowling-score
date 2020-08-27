@@ -118,8 +118,16 @@ class FrameInfo {
         return this.frameState === STRIKE;
     }
 
-    hasSPARE() {
+    hasSpare() {
         return this.frameState === SPARE;
+    }
+
+    hasMiss() {
+        return this.frameState === MISS;
+    }
+
+    getCurrentScore() {
+        return this.currentScore=== SCORE_PENDING ? '' : this.currentScore;
     }
 
     allPinsDown(pinsKnockedDown) {

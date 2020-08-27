@@ -20,7 +20,7 @@ function Frame(props) {
                 }
             </FramePinsWrapper>
             <FrameCurrentScore>
-                299
+                {props.frame.getCurrentScore() }
             </FrameCurrentScore>
         </FrameWrapper>
     );

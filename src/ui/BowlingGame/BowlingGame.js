@@ -27,7 +27,7 @@ function BowlingGame() {
         if(message=== '') {
             setGameInProgress(false);
         } else {
-            setPinsOnTheDeck(10);
+            setPinsOnTheDeck(message);
         }
     }
 
@@ -38,12 +38,15 @@ function BowlingGame() {
     }
 
     function handleBallThrow(pinsKnockedDown) {
+        let lastFramePlayed = scorecard.isLastFrame();
         setScorecard(scorecard.throwBall(pinsKnockedDown, UpdateGameInLastFrame));
         setCounter(counter + 1)
-        if (scorecard.getCurrentFrame().isNewFrame()) {
-            setPinsOnTheDeck(10);
-        } else {
-            setPinsOnTheDeck(pinsOnTheDeck - pinsKnockedDown);
+        if (!lastFramePlayed) {
+            if (scorecard.getCurrentFrame().isNewFrame()) {
+                setPinsOnTheDeck(10);
+            } else {
+                setPinsOnTheDeck(pinsOnTheDeck - pinsKnockedDown);
+            }
         }
     }
 

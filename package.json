@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.1.2",
-    "@zendeskgarden/react-buttons": "^8.20.0",
-    "@zendeskgarden/react-chrome": "^8.20.0",
-    "@zendeskgarden/react-forms": "^8.20.0",
-    "@zendeskgarden/react-grid": "^8.20.0",
-    "@zendeskgarden/react-theming": "^8.20.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.2.0",
-    "styled-components": "^5.1.1"
+    "@testing-library/jest-dom": "^4",
+    "@testing-library/react": "^9",
+    "@testing-library/user-event": "^7",
+    "@zendeskgarden/react-buttons": "^8",
+    "@zendeskgarden/react-chrome": "^8",
+    "@zendeskgarden/react-forms": "^8",
+    "@zendeskgarden/react-grid": "^8",
+    "@zendeskgarden/react-theming": "^8",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-scripts": "3",
+    "styled-components": "^5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,21 +24,9 @@
   },
   "eslintConfig": {
     "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
+  },  
   "devDependencies": {
-    "lodash": "^4.17.20",
-    "remcalc": "^1.0.10"
+    "lodash": "^4",
+    "remcalc": "^1"
   }
 }
